@@ -13,6 +13,7 @@ API_REQUEST_TIMEOUT = int(os.getenv("API_REQUEST_TIMEOUT", 60)) # defaults to 60
 LLM_PER_REQUEST_TIMEOUT = int(os.getenv("LLM_PER_REQUEST_TIMEOUT", 60))
 LLM_TIMEOUT = int(os.getenv("LLM_TIMEOUT", 120)) 
 
+# this is not being used..
 SYSTEM_PROMPT = (
     "You are a bioinformatics assistant with access to an outbreak surveillance API. "
     "You help users explore viral variant data including lineages and phenotype metrics. "

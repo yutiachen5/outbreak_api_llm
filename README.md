@@ -1,6 +1,6 @@
 # Outbreak.info AI Agent
 
-A natural language interface for the Outbreak.info API. Ask questions about viral lineages and phenotype metrics in plain English and get interpreted answers.
+An AI agent to pull data from Outbreak.info API.
 
 ## Setup
 
@@ -13,19 +13,23 @@ A natural language interface for the Outbreak.info API. Ask questions about vira
 We now use the LLM from [together.ai](https://api.together.ai/models)
 
 2. Install dependencies:
-```bash
-    pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
+
+3. Install and activate Pi:
+```
+npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+/login
+export TOGETHER_API_KEY=your_key_here
+pi
 ```
 
 ## Usage
 
-```bash
-python main.py
+We use the [skillS](https://pi.dev/docs/latest/skills) from pi-agent to handle the harness. To pull the data from api, call
 ```
+ /skill:skill_name tool_name arg1 arg2 
 
-The agent will prompt for input and support multi-turn conversations. Type `exit` or `quit` to stop.
-
-## Example Questions
-
-1. Give me the total number of lineages in the PANGO lineage system.
-2. What is the month with the highest binding score with respect to reference BA.2 in the RBD region?
+ /skill:fetch_lineages get_mutation_profile_by_lineage BA.1 PANGO 
+```

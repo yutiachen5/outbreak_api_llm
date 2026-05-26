@@ -1,4 +1,5 @@
 .env
-/__pycache__
-
+/.pi/agent/
+__pycache__/
+*.pyc
 *.json
