@@ -6,14 +6,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 OUTBREAK_API_BASE = os.getenv("OUTBREAK_API_BASE")
-LLM_MODEL = os.getenv("LLM_MODEL")
-TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
 
 API_REQUEST_TIMEOUT = int(os.getenv("API_REQUEST_TIMEOUT", 60)) # defaults to 60s
 LLM_PER_REQUEST_TIMEOUT = int(os.getenv("LLM_PER_REQUEST_TIMEOUT", 60))
 LLM_TIMEOUT = int(os.getenv("LLM_TIMEOUT", 120)) 
 
-# this is not being used..
+# this is not being used.. rm later??
 SYSTEM_PROMPT = (
     "You are a bioinformatics assistant with access to an outbreak surveillance API. "
     "You help users explore viral variant data including lineages and phenotype metrics. "

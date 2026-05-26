@@ -23,13 +23,22 @@ npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 /login
 export TOGETHER_API_KEY=your_key_here
 pi
+/model and select google/gemma-4-31B-it
+/quit
 ```
 
 ## Usage
 
-We use the [skillS](https://pi.dev/docs/latest/skills) from pi-agent to handle the harness. To pull the data from api, call
-```
- /skill:skill_name tool_name arg1 arg2 
+We use the [skills](https://pi.dev/docs/latest/skills) from pi-agent to handle the harness. To pull the data from api, simply ask the agent in natural language like "Get me the delta_bind phenotype metrics for mutations aggregated by sample and collection date". The agent will choose the skill automatically.
 
- /skill:fetch_lineages get_mutation_profile_by_lineage BA.1 PANGO 
-```
+If the agent fails to pick the right skill automatically, you can:
+
+1. Give a hint: "Use the outbreak API fetch_lineages skills to get..."
+2. Force it: /skill:fetch_lineages get_mutation_profile_by_lineage BA.1 PANGO 
+3. Improve the skill description in SKILL.md to make the trigger more obvious.  
+
+Example questions:
+
+1. Give me the total number of lineages in PANGO system.
+2. Give me the mutation profile of lineage BA.1 and XBB.1.5.
+3. ...
