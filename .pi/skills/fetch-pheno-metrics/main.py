@@ -26,10 +26,13 @@ def main():
             phenotype_metric_name=args.phenotype_metric_name,
             lineage_system_name=args.lineage_system_name,
             background=args.background,
+            days=args.days,
             date_bin=args.date_bin,
             max_span_days=args.max_span_days,
         )
 
+    print(json.dumps(result, indent=2))
+    
     # save the result in json
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = f"response_{args.command}_{timestamp}.json"

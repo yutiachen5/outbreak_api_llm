@@ -5,11 +5,11 @@ description: Retrieves strain lineage data from the outbreak API.
 
 ## Fetch Lineages
 
-Retrieve all lineages for a given classification system (default: PANGO).
+Retrieve all lineages for a given classification system (default: usda_genoflu).
 
 ```bash
-python ./.pi/skills/fetch-lineages/main.py get_lienages_by_lineage_system \
-  --lineage_system_name PANGO
+python ./.pi/skills/fetch-lineages/main.py get_lineages_by_lineage_system \
+  --lineage_system_name usda_genoflu
 ```
 
 ## Fetch Mutation Profile by Lineage and Lineage System
@@ -18,6 +18,6 @@ Retrieve mutation profile (region, ref_nt, alt_nt, and count) for a given lineag
 
 ```bash
 python ./.pi/skills/fetch-lineages/main.py get_mutation_profile_by_lineage \
-  --lineage_name BA.1 \
-  --lineage_system_name PANGO
+  --lineage_name D.1.3 \
+  --lineage_system_name usda_genoflu
 ```
