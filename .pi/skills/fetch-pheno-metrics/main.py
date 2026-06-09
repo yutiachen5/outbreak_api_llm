@@ -5,7 +5,7 @@ from datetime import datetime
 from pheno_metric_tools import get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date
 
 def main():
-    parser = argparse.ArgumentParser(description="Outbreak API lineage tools dispatcher")
+    parser = argparse.ArgumentParser(description="Outbreak API phenotype metric tools dispatcher")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     # -- get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date subcommand

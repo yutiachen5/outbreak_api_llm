@@ -39,6 +39,7 @@ If the agent fails to pick the right skill automatically, you can:
 
 Example questions:
 
-1. Give me the total number of lineages in PANGO system.
-2. Give me the mutation profile of lineage BA.1 and XBB.1.5.
-3. ...
+1. Give me the total number of lineages in usda genoflu/pango system (depending on which api you are connecting to).
+2. Give me the mutation profile of lineage BA.1 (sc2) or D1,1 (flu).
+3. Fetch annotation papers for the effect 'Enhanced replication in ferrets' by month.
+4. ...

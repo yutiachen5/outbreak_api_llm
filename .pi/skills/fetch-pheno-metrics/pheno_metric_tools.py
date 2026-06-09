@@ -7,7 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent)) # go up 4 dirs
 from config import OUTBREAK_API_BASE, API_REQUEST_TIMEOUT
 
-
+# TODO: this is only for sc2 right now, we need to include the api endpoint for flu as well
 def get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date(
     phenotype_metric_name: str,
     lineage_system_name: str = "PANGO",
