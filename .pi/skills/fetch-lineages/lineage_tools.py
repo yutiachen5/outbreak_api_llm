@@ -32,7 +32,7 @@ def get_mutation_incidence_by_lineage(
         change_bin: str= "aa",
         lineage_system_name: str = "usda_genoflu"
 ) -> dict:
-    url = f"{OUTBREAK_API_BASE}v0/lineages:mutationIncidence" #https://h5n1.outbreak.info/api/v0/lineages:mutationIncidence?lineage=D1.1&change_bin=aa&lineage_system_name=usda_genoflu&prevalence_threshold=0.75
+    url = f"{OUTBREAK_API_BASE}/v0/lineages:mutationIncidence" #https://h5n1.outbreak.info/api/v0/lineages:mutationIncidence?lineage=D1.1&change_bin=aa&lineage_system_name=usda_genoflu&prevalence_threshold=0.75
     response = requests.get(
         url = url,
         params={"lineage":lineage, "change_bin":change_bin, "lineage_system_name":lineage_system_name, "prevalence_threshold":prevalence_threshold},

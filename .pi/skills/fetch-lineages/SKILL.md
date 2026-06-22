@@ -25,6 +25,7 @@ python ./.pi/skills/fetch-lineages/main.py get_mutation_profile_by_lineage \
 ## Fetch Mutation Incidence by Lineage and Lineage System
 
 Retrieve mutation incidence for a given lineage and lineage system
+Use change_bin='aa' for amino acid changes or 'nt' for nucleotide changes 
 
 ```bash
 python ./.pi/skills/fetch-lineage/main.py get_mutation_incidence_by_lineage \
