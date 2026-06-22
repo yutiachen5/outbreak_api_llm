@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import requests
 from pathlib import Path
@@ -22,6 +21,21 @@ def get_mutation_profile_by_lineage(
     response = requests.get(
         url=url, 
         params={"lineage": lineage_name, "lineage_system_name": lineage_system_name}, 
+        timeout=API_REQUEST_TIMEOUT
+    )
+    response.raise_for_status()
+    return response.json()
+
+def get_mutation_incidence_by_lineage(
+        lineage, 
+        prevalence_threshold= 0.75,
+        change_bin: str= "aa",
+        lineage_system_name: str = "usda_genoflu"
+) -> dict:
+    url = f"{OUTBREAK_API_BASE}v0/lineages:mutationIncidence" #https://h5n1.outbreak.info/api/v0/lineages:mutationIncidence?lineage=D1.1&change_bin=aa&lineage_system_name=usda_genoflu&prevalence_threshold=0.75
+    response = requests.get(
+        url = url,
+        params={"lineage":lineage, "change_bin":change_bin, "lineage_system_name":lineage_system_name, "prevalence_threshold":prevalence_threshold},
         timeout=API_REQUEST_TIMEOUT
     )
     response.raise_for_status()
