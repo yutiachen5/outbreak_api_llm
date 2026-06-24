@@ -2,7 +2,7 @@ import json
 import argparse
 from datetime import datetime
 
-from annotations_tools import get_annotation_papers_by_mutation_and_collection_date
+from annotations_tools import get_annotation_papers_by_mutation_and_collection_date, get_annotation_effects, get_annotations_by_effect_detail
 
 def main():
     parser = argparse.ArgumentParser(description="Outbreak API annotations tools dispatcher")
@@ -16,6 +16,14 @@ def main():
     a_by_mut_and_date.add_argument("--days", default=5, type=int, help="Interval length in days")
     a_by_mut_and_date.add_argument("--max_span_days", type=int, default=31, help="Maximum collection span in days")
 
+    # -- get_annotation_effects subcommand
+    a_effects = subparsers.add_parser("get_annotation_effects", \
+                                      help="Get annotation effects.")
+
+    # - - get_annotations_by_effect_detail subcommand
+    a_by_effect = subparsers.add_parser("get_annotations_by_effect_detail", \
+                                        help ="Get annotations by effect detail")
+    a_by_effect.add_argument("--effect_detail", required=True, type=str, help="Plain string with spaces")
 
     args = parser.parse_args()
 
@@ -25,6 +33,12 @@ def main():
             days=args.days,
             date_bin=args.date_bin,
             max_span_days=args.max_span_days,
+        )
+    elif args.command == "get_annotation_effects":
+        result = get_annotation_effects()
+    elif args.command == "get_annotations_by_effect_detail":
+        result = get_annotations_by_effect_detail(
+            effect_detail=args.effect_detail
         )
 
     print(json.dumps(result, indent=2))

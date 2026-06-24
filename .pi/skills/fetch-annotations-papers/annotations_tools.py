@@ -27,3 +27,24 @@ def get_annotation_papers_by_mutation_and_collection_date(
     response = requests.get(url, params=params, timeout=API_REQUEST_TIMEOUT)
     response.raise_for_status()
     return response.json()
+
+def get_annotation_effects() -> dict:
+    url = f"{OUTBREAK_API_BASE}/v0/annotationEffects" #https://h5n1.outbreak.info/api/v0/annotationEffects
+    response = requests.get(
+        url = url,
+        timeout= API_REQUEST_TIMEOUT
+    )
+    response.raise_for_status()
+    return response.json()
+
+def get_annotations_by_effect_detail(
+        effect_detail: str
+) -> dict:
+    url = f"{OUTBREAK_API_BASE}/v0/annotations:byMutationsAndAminoAcidPosition" #https://h5n1.outbreak.info/api/v0/annotations:byMutationsAndAminoAcidPosition?effect_detail=Increased%20virus%20binding%20to%20%CE%B12-6
+    response = requests.get(
+        url=url,
+        params = {"effect_detail": effect_detail},
+        timeout = API_REQUEST_TIMEOUT
+    )
+    response.raise_for_status()
+    return response.json()

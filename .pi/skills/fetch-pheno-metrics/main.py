@@ -2,11 +2,14 @@ import json
 import argparse
 from datetime import datetime
 
-from pheno_metric_tools import get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date
+from pheno_metric_tools import get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date, get_phenotype_metrics
 
 def main():
     parser = argparse.ArgumentParser(description="Outbreak API phenotype metric tools dispatcher")
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    # -- get_phenotype_metrics subcommand
+    p_phenotype_metrics = subparsers.add_parser("get_phenotype_metrics", help="Get phenotype metrics")
 
     # -- get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date subcommand
     p_mut_agg = subparsers.add_parser("get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date", \
@@ -30,6 +33,8 @@ def main():
             date_bin=args.date_bin,
             max_span_days=args.max_span_days,
         )
+    elif args.command == "get_phenotype_metrics":
+        result = get_phenotype_metrics()
 
     print(json.dumps(result, indent=2))
     

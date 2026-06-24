@@ -40,3 +40,19 @@ def get_mutation_incidence_by_lineage(
     )
     response.raise_for_status()
     return response.json()
+
+def get_lineage_count(
+        group_by: str = "collection_data",
+        date_bin: str="month",
+        days = 5,
+        change_bin: str = "aa",
+        max_span_days =30
+) -> dict:
+    url =f"{OUTBREAK_API_BASE}/v0/lineages:count" #https://h5n1.outbreak.info/api/v0/lineages:count?group_by=collection_date&date_bin=month&days=5&change_bin=aa&max_span_days=30
+    response = requests.get(
+        url=url,
+        params={"group_by": group_by,"date_bin":date_bin, "days": days, "change_bin": change_bin, "max_span_days": max_span_days},
+        timeout = API_REQUEST_TIMEOUT
+    )
+    response.raise_for_status()
+    return response.json()

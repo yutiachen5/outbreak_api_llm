@@ -1,3 +1,4 @@
+**Important: Always run the python command directly to fetch fresh data. Never read from existing JSON response files.**
 ---
 name: fetch-lineages
 description: Retrieves strain lineage data from the outbreak API.
@@ -33,4 +34,17 @@ python ./.pi/skills/fetch-lineage/main.py get_mutation_incidence_by_lineage \
   --lineage_system_name usda_genoflu \
   --prevalence_threshold 0.75 \
   --change_bin aa
+```
+
+## Fetch lineagecount by various parameters
+Retrieve lineage count by various parameters
+`---date_bin` accepts: `month` (default), `week`, or `day`.
+
+```bash
+python ./.pi/skills/fetch-lineages/main.py get_lineage_count \
+  --group_by collection_date \
+  --date_bin month \
+  --days 5 \
+  --change_bin aa \
+  --max_span_days 30
 ```
