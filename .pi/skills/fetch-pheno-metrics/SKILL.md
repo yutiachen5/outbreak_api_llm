@@ -1,4 +1,3 @@
-**Important: Always run the python command directly to fetch fresh data. Never read from existing JSON response files.**
 ---
 name: fetch-pheno-metrics
 description: Retrieves phenotype metrics data from the outbreak API.
@@ -9,7 +8,7 @@ description: Retrieves phenotype metrics data from the outbreak API.
 Retrieve all phenotype metrics and their assay types
 
 ```bash
-python ./.pi/skills/fetch-pheno-metrics/main.py get_phenotype_metrics \
+python ./.pi/skills/fetch-pheno-metrics/main.py get_phenotype_metrics 
 ```
 
 

@@ -1,4 +1,3 @@
-**Important: Always run the python command directly to fetch fresh data. Never read from existing JSON response files.**
 ---
 name: fetch-mutations
 description: Retrieves mutation data from the outbreak API.

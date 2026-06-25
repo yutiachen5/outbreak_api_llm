@@ -1,5 +1,3 @@
-**Important: Always run the python command directly to fetch fresh data. Never read from existing JSON response files.** 
-
 ---
 name: fetch-variants
 description: Retrieves variant data from the outbreak API.
@@ -20,7 +18,7 @@ python ./.pi/skills/fetch-variants/main.py get_variant_frequency_score \
 Retrieve mutation lag by lineage and lineage system.
 
 ```bash
-  python ./.pi/skills/fetch-variants/main.py get_mutation_lab_by_lineage \
+  python ./.pi/skills/fetch-variants/main.py get_mutation_lag_by_lineage \
     --lineage B3.13 \
     --lineage_system_name usda_genoflu
 ```

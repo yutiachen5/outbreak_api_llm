@@ -1,4 +1,3 @@
-**Important: Always run the python command directly to fetch fresh data. Never read from existing JSON response files.**
 ---
 name: fetch-lineages
 description: Retrieves strain lineage data from the outbreak API.
@@ -29,7 +28,7 @@ Retrieve mutation incidence for a given lineage and lineage system
 Use change_bin='aa' for amino acid changes or 'nt' for nucleotide changes 
 
 ```bash
-python ./.pi/skills/fetch-lineage/main.py get_mutation_incidence_by_lineage \
+python ./.pi/skills/fetch-lineages/main.py get_mutation_incidence_by_lineage \
   --lineage D1.1 \
   --lineage_system_name usda_genoflu \
   --prevalence_threshold 0.75 \
