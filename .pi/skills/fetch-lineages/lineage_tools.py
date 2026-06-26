@@ -2,6 +2,9 @@
 import sys
 import requests
 from pathlib import Path
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent)) # go up 4 dirs
 from config import OUTBREAK_API_BASE, API_REQUEST_TIMEOUT
@@ -56,3 +59,33 @@ def get_lineage_count(
     )
     response.raise_for_status()
     return response.json()
+
+def plot_lineage_sample_count(
+        group_by: str = "lineage_name",
+        lineage_system_name = "usda_genoflu",
+        output_path: str = "lineage_sample_count.png"
+):
+    url = f"{OUTBREAK_API_BASE}/v0/lineages:count" #https://h5n1.outbreak.info/api/v0/lineages:count?group_by=lineage_name&lineage_system_name=usda_genoflu
+    response = requests.get(
+        url =url,
+        params = {"group_by": group_by, "lineage_system_name" : lineage_system_name},
+        timeout = API_REQUEST_TIMEOUT
+    )
+    response.raise_for_status()
+    data = response.json()
+
+    # Filter by lineage_system_name as the API may return multiple systems
+    filtered = [item for item in data if item["lineage_system"] == lineage_system_name]
+    lineages = [item["lineage"] for item in filtered]
+    counts =[item["count"] for item in filtered]
+
+    plt.figure(figsize= (15,6))
+    plt.bar(lineages, counts)
+    plt.xlabel("Lineage")
+    plt.ylabel("Count")
+    plt.title("Sample Count by Lineage")
+    plt.xticks(rotation = 90)
+    plt.tight_layout()
+    plt.savefig(output_path)
+    plt.close()
+    return data
