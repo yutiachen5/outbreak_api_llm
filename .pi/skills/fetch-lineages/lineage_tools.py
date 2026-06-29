@@ -45,47 +45,37 @@ def get_mutation_incidence_by_lineage(
     return response.json()
 
 def get_lineage_count(
-        group_by: str = "collection_data",
-        date_bin: str="month",
-        days = 5,
-        change_bin: str = "aa",
-        max_span_days =30
-) -> dict:
-    url =f"{OUTBREAK_API_BASE}/v0/lineages:count" #https://h5n1.outbreak.info/api/v0/lineages:count?group_by=collection_date&date_bin=month&days=5&change_bin=aa&max_span_days=30
-    response = requests.get(
-        url=url,
-        params={"group_by": group_by,"date_bin":date_bin, "days": days, "change_bin": change_bin, "max_span_days": max_span_days},
-        timeout = API_REQUEST_TIMEOUT
-    )
-    response.raise_for_status()
-    return response.json()
-
-def plot_lineage_sample_count(
-        group_by: str = "lineage_name",
-        lineage_system_name = "usda_genoflu",
-        output_path: str = "lineage_sample_count.png"
-):
-    url = f"{OUTBREAK_API_BASE}/v0/lineages:count" #https://h5n1.outbreak.info/api/v0/lineages:count?group_by=lineage_name&lineage_system_name=usda_genoflu
-    response = requests.get(
-        url =url,
-        params = {"group_by": group_by, "lineage_system_name" : lineage_system_name},
-        timeout = API_REQUEST_TIMEOUT
-    )
+        group_by: str | None = None,
+        date_bin: str = "month",
+        days: int = 5,
+        q: str | None = None,
+        max_span_days: int = 30,
+        lineage_system_name: str = "usda_genoflu",
+        visualize: bool = False,
+        output_path: str | None = "lineage_sample_count.png",
+) -> dict | list:
+    url = f"{OUTBREAK_API_BASE}/v0/lineages:count"
+    params = {"date_bin": date_bin, "days": days, "max_span_days": max_span_days, "lineage_system_name": lineage_system_name}
+    if group_by is not None:
+        params["group_by"] = group_by
+    if q is not None:
+        params["q"] = q
+    response = requests.get(url=url, params=params, timeout=API_REQUEST_TIMEOUT)
     response.raise_for_status()
     data = response.json()
 
-    # Filter by lineage_system_name as the API may return multiple systems
-    filtered = [item for item in data if item["lineage_system"] == lineage_system_name]
-    lineages = [item["lineage"] for item in filtered]
-    counts =[item["count"] for item in filtered]
+    if isinstance(data, list) and visualize and output_path is not None:
+        filtered = [item for item in data if item.get("lineage_system") == lineage_system_name]
+        lineages = [item["lineage"] for item in filtered]
+        counts = [item["count"] for item in filtered]
+        plt.figure(figsize=(15, 6))
+        plt.bar(lineages, counts)
+        plt.xlabel("Lineage")
+        plt.ylabel("Count")
+        plt.title("Sample Count by Lineage")
+        plt.xticks(rotation=90)
+        plt.tight_layout()
+        plt.savefig(output_path)
+        plt.close()
 
-    plt.figure(figsize= (15,6))
-    plt.bar(lineages, counts)
-    plt.xlabel("Lineage")
-    plt.ylabel("Count")
-    plt.title("Sample Count by Lineage")
-    plt.xticks(rotation = 90)
-    plt.tight_layout()
-    plt.savefig(output_path)
-    plt.close()
     return data

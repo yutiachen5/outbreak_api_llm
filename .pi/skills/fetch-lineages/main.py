@@ -1,9 +1,7 @@
 import json
 import argparse
 from datetime import datetime
-import matplotlib
-
-from lineage_tools import get_lineages_by_lineage_system, get_mutation_profile_by_lineage, get_mutation_incidence_by_lineage, get_lineage_count, plot_lineage_sample_count
+from lineage_tools import get_lineages_by_lineage_system, get_mutation_profile_by_lineage, get_mutation_incidence_by_lineage, get_lineage_count
 
 def main():
     parser = argparse.ArgumentParser(description="Outbreak API lineage tools dispatcher")
@@ -26,18 +24,15 @@ def main():
     p_mut_incidence.add_argument("--change_bin", default = "aa")
 
     # -- get_lineage_count subcommand
-    p_lineage_count = subparsers.add_parser("get_lineage_count", help="Get lineage count by various parameters")
-    p_lineage_count.add_argument("--group_by", default="collection_data")
+    p_lineage_count = subparsers.add_parser("get_lineage_count", help="Get lineage counts; plots a bar chart when response is per-lineage")
+    p_lineage_count.add_argument("--group_by", default=None)
     p_lineage_count.add_argument("--date_bin", default="month")
     p_lineage_count.add_argument("--days", type=int, default=5)
-    p_lineage_count.add_argument("--change_bin", default="aa")
+    p_lineage_count.add_argument("--q", default=None)
     p_lineage_count.add_argument("--max_span_days", type=int, default=30)
-
-    # -- plot_lineage_sample_count
-    p_plot_lineage = subparsers.add_parser("plot_lineage_sample_count", help= "Plot sample count by lineage")
-    p_plot_lineage.add_argument("--lineage_system_name", default = "usda_genoflu")
-    p_plot_lineage.add_argument("--group_by", default = "lineage_name")
-    p_plot_lineage.add_argument("--output_path", default = "lineage_sample_count.png")
+    p_lineage_count.add_argument("--lineage_system_name", default="usda_genoflu")
+    p_lineage_count.add_argument("--visualize", action="store_true", default=False)
+    p_lineage_count.add_argument("--output_path", default="lineage_sample_count.png")
 
 
     args = parser.parse_args()
@@ -59,16 +54,13 @@ def main():
     elif args.command == "get_lineage_count":
         result = get_lineage_count(
             group_by=args.group_by,
-            date_bin = args.date_bin,
-            days = args.days,
-            change_bin =args.change_bin,
-            max_span_days =args.max_span_days
-        )
-    elif args.command == "plot_lineage_sample_count":
-        result = plot_lineage_sample_count(
-            group_by =args.group_by,
+            date_bin=args.date_bin,
+            days=args.days,
+            q=args.q,
+            max_span_days=args.max_span_days,
             lineage_system_name=args.lineage_system_name,
-            output_path=args.output_path
+            visualize=args.visualize,
+            output_path=args.output_path,
         )
     print(json.dumps(result, indent=2))
 
