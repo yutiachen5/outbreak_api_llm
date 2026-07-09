@@ -2,7 +2,7 @@ import json
 import argparse
 from datetime import datetime
 
-from pheno_metric_tools import get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date, get_phenotype_metrics
+from pheno_metric_tools import get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date, get_phenotype_metrics, get_phenotype_metric_min_max
 
 def main():
     parser = argparse.ArgumentParser(description="Outbreak API phenotype metric tools dispatcher")
@@ -21,6 +21,9 @@ def main():
     p_mut_agg.add_argument("--days", default=5, type=int, help="Interval length in days")
     p_mut_agg.add_argument("--max_span_days", type=int, default=366, help="Maximum collection span in days")
 
+    # -- get_phenotype_metric_min_max subcommand
+    p_min_max = subparsers.add_parser("get_phenotype_metric_min_max", help="Get min and max values for a phenotype metric")
+    p_min_max.add_argument("--phenotype_metric_name", required=True, help="e.g. sa26_usage_increase_new")
 
     args = parser.parse_args()
 
@@ -35,7 +38,10 @@ def main():
         )
     elif args.command == "get_phenotype_metrics":
         result = get_phenotype_metrics()
-
+    elif args.command == "get_phenotype_metric_min_max":
+        result = get_phenotype_metric_min_max(
+            phenotype_metric_name=args.phenotype_metric_name
+        )
     print(json.dumps(result, indent=2))
     
     # save the result in json

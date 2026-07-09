@@ -40,3 +40,15 @@ def get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date(
     response.raise_for_status()
     return response.json()
 
+def get_phenotype_metric_min_max(
+        phenotype_metric_name: str
+) -> list:
+    url = f"{OUTBREAK_API_BASE}/v0/phenotype_metric_values:getMinAndMaxValues" #https://h5n1.outbreak.info/api/v0/phenotype_metric_values:getMinAndMaxValues?phenotype_metric_name=sa26_usage_increase_new\
+
+    params ={
+        "phenotype_metric_name": phenotype_metric_name
+    }
+    
+    response = requests.get(url, params=params, timeout=API_REQUEST_TIMEOUT)
+    response.raise_for_status()
+    return response.json()

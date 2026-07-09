@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 *.json
 desktop.ini
+mutation_data.csv

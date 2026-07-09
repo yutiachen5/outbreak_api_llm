@@ -31,3 +31,11 @@ Retrieve annotions with mutation and aa position data by effect detail
 python ./.pi/skills/fetch-annotations-papers/main.py get_annotations_by_effect_detail \
   --effect_detail Increased%20virus%20binding%20to%20α2-6
 ```
+
+## Example Prompts
+- "Fetch annotation papers for the mutation XAJ25415.1 with the effect detail 'Enhanced replication in ferrets' and group the results by month, starting from day 5, with a maximum span of 31 days."
+- "Retrieve all annotation effects available in the outbreak API."
+- "Get annotations for the effect detail 'Increased virus binding to α2-6' and include mutation and amino acid position data."
+- "What annotation effects are available?"
+- "Show me the annotation for enhanced replication in ferrets."
+- "Get me annotations by effect detail for increased virus binding."
