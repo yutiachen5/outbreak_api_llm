@@ -15,6 +15,7 @@ def main():
     a_by_mut_and_date.add_argument("--date_bin", default="month", choices=["month", "week", "year"], help="Time binning interval")
     a_by_mut_and_date.add_argument("--days", default=5, type=int, help="Interval length in days")
     a_by_mut_and_date.add_argument("--max_span_days", type=int, default=31, help="Maximum collection span in days")
+    a_by_mut_and_date.add_argument("--visualize", action="store_true", help="Visualize the results as bar plots")
 
     # -- get_annotation_effects subcommand
     a_effects = subparsers.add_parser("get_annotation_effects", \
@@ -24,6 +25,8 @@ def main():
     a_by_effect = subparsers.add_parser("get_annotations_by_effect_detail", \
                                         help ="Get annotations by effect detail")
     a_by_effect.add_argument("--effect_detail", required=True, type=str, help="Plain string with spaces")
+    a_by_effect.add_argument("--visualize", action="store_true", help="Visualize the results as bar plots")
+    a_by_effect.add_argument("--segment", default="HA", type=str, help="Segment for visualization")
 
     args = parser.parse_args()
 
@@ -33,12 +36,15 @@ def main():
             days=args.days,
             date_bin=args.date_bin,
             max_span_days=args.max_span_days,
+            visualize=args.visualize
         )
     elif args.command == "get_annotation_effects":
         result = get_annotation_effects()
     elif args.command == "get_annotations_by_effect_detail":
         result = get_annotations_by_effect_detail(
-            effect_detail=args.effect_detail
+            effect_detail=args.effect_detail,
+            visualize=args.visualize,
+            segment=args.segment
         )
 
     print(json.dumps(result, indent=2))

@@ -5,3 +5,4 @@ __pycache__/
 *.json
 desktop.ini
 mutation_data.csv
+session_history.html

@@ -20,6 +20,7 @@ def main():
     p_mut_agg.add_argument("--date_bin", default="month", choices=["month", "week", "year"], help="Time binning interval")
     p_mut_agg.add_argument("--days", default=5, type=int, help="Interval length in days")
     p_mut_agg.add_argument("--max_span_days", type=int, default=366, help="Maximum collection span in days")
+    p_mut_agg.add_argument("--host", default=None, help="Host species (e.g. cattle, chicken)")
 
     # -- get_phenotype_metric_min_max subcommand
     p_min_max = subparsers.add_parser("get_phenotype_metric_min_max", help="Get min and max values for a phenotype metric")
@@ -35,7 +36,8 @@ def main():
             days=args.days,
             date_bin=args.date_bin,
             max_span_days=args.max_span_days,
-        )
+            host=args.host
+        )   
     elif args.command == "get_phenotype_metrics":
         result = get_phenotype_metrics()
     elif args.command == "get_phenotype_metric_min_max":

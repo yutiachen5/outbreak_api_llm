@@ -23,6 +23,7 @@ def get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date(
     date_bin: str = "month",
     days: int = 5,
     max_span_days: int = 366,
+    host: str = None 
 ) -> dict:
     url = f"{OUTBREAK_API_BASE}/v0/phenotype_metric_values:forMutationsAggregateBySampleAndCollectionDate"
 
@@ -31,8 +32,10 @@ def get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date(
         "lineage_system_name": lineage_system_name,
         "date_bin": date_bin,
         "days": days,
-        "max_span_days": max_span_days,
+        "max_span_days": max_span_days
     }
+    if host is not None:
+        params["q"] =f"host={host}" 
     if background is not None:
         params["background"] = background # only add background to params when it's not null 
 
