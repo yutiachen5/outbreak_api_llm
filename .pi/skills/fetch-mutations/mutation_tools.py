@@ -70,3 +70,23 @@ def load_site_numbering_map():
         for row in reader:
             lookup[row["sequential_site"]] = row["reference_site"]
     return lookup
+
+def get_region_and_gff() -> dict:
+    url = f"{OUTBREAK_API_BASE}/mutations:regionAndGffFeature" #https://h5n1.outbreak.info/api/mutations:regionAndGffFeature
+    response = requests.get(
+        url=url,
+        timeout=API_REQUEST_TIMEOUT
+    )
+    response.raise_for_status()
+    data = response.json()
+    return data
+
+def get_mutation_by_sample(q: str) -> dict:
+    url = f"{OUTBREAK_API_BASE}/mutations/by/sample?q={q}" #https://h5n1.outbreak.info/api/mutations/by/sample?q=
+    response = requests.get(
+        url=url,
+        timeout=API_REQUEST_TIMEOUT
+    )
+    response.raise_for_status()
+    data = response.json()
+    return data

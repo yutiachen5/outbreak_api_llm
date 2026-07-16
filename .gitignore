@@ -3,6 +3,8 @@
 __pycache__/
 *.pyc
 *.json
+*.png
+*.html
 desktop.ini
 mutation_data.csv
 session_history.html

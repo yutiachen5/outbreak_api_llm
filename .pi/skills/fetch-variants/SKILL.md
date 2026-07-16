@@ -22,11 +22,3 @@ Retrieve mutation lag by lineage and lineage system.
     --lineage B3.13 \
     --lineage_system_name usda_genoflu
 ```
-
-## Example Prompts
-- "Retrieve variant frequency scores for the region XAJ25415.1 and metric sa26_usage_increase_new."
-- "Get mutation lag for the lineage B3.13 using the usda_genoflu lineage system."
-- "Show me the variant frequency scores for region XAJ25415.1 with metric sa26_usage_increase_new."
-- "What is the mutation lag for lineage D1.1?"
-- "Get variant frequency scores for HA region"
-- "How long does it take for mutations to appear in lineage B3.13?"

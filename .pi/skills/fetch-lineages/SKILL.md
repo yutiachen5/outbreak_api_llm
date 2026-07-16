@@ -67,13 +67,3 @@ python ./.pi/skills/fetch-lineages/main.py get_lineage_count \
   --date_bin week \
   --days 30
 ```
-## Example Prompts
-- "Get mutation incidence for lineage D1.1"
-- "Retrieve all lineages for the usda_genoflu classification system."
-- "Get the mutation profile for lineage D.1.3 using the usda_genoflu lineage system."
-- "Fetch mutation incidence for lineage D1.1 with a prevalence threshold of 0.75 and amino acid changes."
-- "Get lineage counts grouped by collection date, binned by month, starting from day"
-- "Show me a bar chart of lineage sample counts for usda_genoflu."
-- "What lineages are in the pango system?"
-- "Get mutation incidence for B3.13 and visualize it."
-- "Get lineage counts grouped by collection date, binned by month, starting from day 5 with a max spam of 30 days."

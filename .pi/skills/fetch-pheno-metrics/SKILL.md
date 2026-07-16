@@ -11,43 +11,11 @@ Retrieve all phenotype metrics and their assay types
 python ./.pi/skills/fetch-pheno-metrics/main.py get_phenotype_metrics 
 ```
 
-
-## Fetch Aggregated Phenotype Metrics Values for Mutations by Sample and Collection Date
-
-Retrieve aggregated phenotype metric values for mutations by sample and collection date.
-
-```bash
-python ./.pi/skills/fetch-pheno-metrics/main.py get_pheno_metric_for_mutation_aggregated_by_sample_and_collection_date \
-  --phenotype_metric_name sa26_usage_increase_new \
-  --lineage_system_name PANGO \
-  --background NC_045512.2_BA.1_rbd \
-  --date_bin month \
-  --days 5 \
-  --max_span_days 366 \
-  --host cattle
-```
-
-`--background` is optional — omit it if the user does not specify one, use the format like NC_045512.2, NC_045512.2_BA.1_rbd, and NC_045512.2_BA.2_rbd
-`--host` is optional - omit it to get data for all hosts. Accepts values like: cattle, chicken, turkey, etc.
-`--date_bin` accepts: `month` (default), `week`, or `year`.
-
-
 ## Fetch Min and Max Values for a Phenotype Metric
 
-Retrieve the minimum and maximum values for a given phenotype metric.
+Retrieve the minimum and maximum values for a given phenotype metric. This should only be used when the user asks for visualization.
 
 ```bash
 python ./.pi/skills/fetch-pheno-metrics/main.py get_phenotype_metric_min_max \
   --phenotype_metric_name sa26_usage_increase_new
 ```
-
-## Example Prompts
-- "Retrieve all phenotype metrics and their assay types."
-- "Get aggregated phenotype metric values for the mutation D614G, using the sa26_usage_increase_new metric"
-- "Fetch aggregated phenotype metric values for the mutation D614G, using the sa26_usage_increase_new metric, grouped by month, starting from day 5, with a maximum span of 366 days."
-- "Get the minimum and maximum values for the phenotype metric sa26_usage_increase_new."
-- "What phenotype metrics are available?"
-- "What is the range of values for sa26_usage_increase_new?"
-- "Get phenotype data for sa26_usage_increase_new filtered to cattle only"
-- "Show me sa26_usage_increase_new data across all hosts"
-- "Get phenotypte data for sa26_usage_increase_new"
