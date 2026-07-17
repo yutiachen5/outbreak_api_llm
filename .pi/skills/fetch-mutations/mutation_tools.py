@@ -81,7 +81,25 @@ def get_region_and_gff() -> dict:
     data = response.json()
     return data
 
-def get_mutation_by_sample(q: str) -> dict:
+def get_mutation_by_sample(
+        q: str = None,
+        country: str = None,
+        collection_start_date: str=None, 
+        collection_end_date: str=None,
+        host: str=None
+) -> dict:
+    if q is None:
+        filters =[]
+        if country:
+            filters.append(f"country:{country}")
+        if collection_start_date:
+            filters.append(f"collection_start_date:>={collection_start_date}")
+        if collection_end_date:
+            filters.append(f"collection_end_date:<={collection_end_date}")
+        if host:
+            filters.append(f"host:{host}")
+        if filters:
+            q="^".join(filters)
     url = f"{OUTBREAK_API_BASE}/mutations/by/sample?q={q}" #https://h5n1.outbreak.info/api/mutations/by/sample?q=
     response = requests.get(
         url=url,

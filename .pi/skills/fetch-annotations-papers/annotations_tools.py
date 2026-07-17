@@ -6,6 +6,7 @@ from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 from config import OUTBREAK_API_BASE, API_REQUEST_TIMEOUT
@@ -16,7 +17,8 @@ def get_annotation_papers_by_mutation_and_collection_date(
     date_bin: str = "month",
     days: int = 5,
     max_span_days: int = 31,
-    visualize: bool = False
+    visualize: bool = False,
+    output_path: str | None = None
 ) -> dict:
     url = f"{OUTBREAK_API_BASE}/v0/annotations:byMutationsAndCollectionDate"
 
@@ -70,7 +72,10 @@ def get_annotation_papers_by_mutation_and_collection_date(
         ax2.legend()
         
         plt.tight_layout()
-        plt.savefig("annotation_papers.png")
+        if output_path is None:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_path = f"annotation_papers_{timestamp}.png"
+        plt.savefig(output_path)
         plt.close()
     
     return data
@@ -79,7 +84,8 @@ def get_annotation_papers_by_mutation_and_collection_date(
 def get_annotations_by_effect_detail(
     effect_detail: str,
     visualize: bool = False,
-    segment: str = "HA"
+    segment: str = "HA",
+    output_path: str | None = None
 ) -> dict:
     url = f"{OUTBREAK_API_BASE}/v0/annotations:byMutationsAndAminoAcidPosition"
     response = requests.get(url=url, params={"effect_detail": effect_detail}, timeout=API_REQUEST_TIMEOUT)
@@ -105,7 +111,10 @@ def get_annotations_by_effect_detail(
             ax.set_title("Mutations by Position (HA)")
             
             plt.tight_layout()
-            plt.savefig(f"annotation_aa_position_{segment}.png")
+            if output_path is None:
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                output_path = f"annotations_by_position_{segment}_{timestamp}.png"
+            plt.savefig(output_path)
             plt.close()
     
     return data
