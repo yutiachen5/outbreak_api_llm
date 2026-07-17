@@ -21,8 +21,12 @@ def main():
     p_region_and_gff = subparsers.add_parser("get_region_and_gff", help="Get mapping between region(segment) and gff_feature.")
 
     # --get_mutation_by_sample subcommand
-    p_mut_by_sample = subparsers.add_parser("get_mutation_by_sample", help="Get mutation by sample.")
-    p_mut_by_sample.add_argument("-q", required=True, type=str)
+    a_mutation_sample = subparsers.add_parser("get_mutation_by_sample", help="Get mutations by sample query")
+    a_mutation_sample.add_argument("-q", default=None, type=str, help="Query string")
+    a_mutation_sample.add_argument("--country", default=None, type=str, help="Country name")
+    a_mutation_sample.add_argument("--collection_start_date", default=None, type=str, help="Start date YYYY-MM-DD")
+    a_mutation_sample.add_argument("--collection_end_date", default=None, type=str, help="End date YYYY-MM-DD")
+    a_mutation_sample.add_argument("--host", default=None, type=str, help="Host (cattle, chicken, etc)")
 
 
     args = parser.parse_args()
@@ -38,7 +42,13 @@ def main():
     elif args.command == "get_region_and_gff":
         result = get_region_and_gff()
     elif args.command == "get_mutation_by_sample":
-        result = get_mutation_by_sample(q=args.q)
+        result = get_mutation_by_sample(
+        q=args.q,
+        country=args.country,
+        collection_start_date=args.collection_start_date,
+        collection_end_date=args.collection_end_date,
+        host=args.host
+    )
 
     print(json.dumps(result, indent=2))
 

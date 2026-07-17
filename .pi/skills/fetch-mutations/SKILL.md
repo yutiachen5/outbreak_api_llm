@@ -32,16 +32,14 @@ python ./.pi/skills/fetch-mutations/main.py get_region_and_gff
 ```
 
 ## Fetch Mutation by Sample Query
-Fetch mutations that exist in samples where (user query). This should be used when the user is asking for the mutation in a certain time period or host level or geolocation.... Some common column names to use:
 
-time - collection_start_date/collection_end_date 
-country - country_name
-state - admin1_name
-host - host
+Fetch mutations using individual filter parameters or a custom query string for country, time period, state, and host.
 
 ```bash
 python ./.pi/skills/fetch-mutations/main.py get_mutation_by_sample \
-  -q "collection_start_date%3E%3D2024-01-01%5Ecollection_start_date%3C%3D2024-12-31"
+  --country "United States" \
+  --collection_start_date "2024-01-01" \
+  --collection_end_date "2024-12-31" \
+  --host cattle
 ```
-
-
+Common filters: country (country_name), time (collection_start_date/collection_end_date), state (admin1_name), host (cattle, chicken, etc)
