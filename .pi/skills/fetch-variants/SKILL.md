@@ -12,6 +12,10 @@ python ./.pi/skills/fetch-variants/main.py get_variant_frequency_score \
   --region XAJ25415.1 \
   --metric sa26_usage_increase_new
 ```
+The region here should be a gene region (gff feature) not a geopraphic location.
+mapping between region/segment and phenotype metric:
+HA - entry_in_293t_cells, stability, sa26_usage_increase, sa26_usage_increase_new, mature_h5_site, ferret_sera_escape, mouse_sera_escape, entry_in_sa26_and_sa23_293t_cells, evescape, evescape_sigmoid
+PB2 - mutdiffsel
 
 ## Fetch Mutation Lag by Lineage and Lineage System
 
