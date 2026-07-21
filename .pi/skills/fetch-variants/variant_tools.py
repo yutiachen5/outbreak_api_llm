@@ -31,5 +31,5 @@ def get_mutation_lag_by_lineage(
         params = {"lineage": lineage, "lineage_system_name" : lineage_system_name},
         timeout= API_REQUEST_TIMEOUT
     )
-    response.raise_for_status
+    response.raise_for_status()
     return response.json()
