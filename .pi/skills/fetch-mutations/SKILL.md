@@ -37,7 +37,7 @@ python ./.pi/skills/fetch-mutations/main.py get_region_and_gff
 Fetch mutations using individual filter parameters or a custom query string for country, time period, state, and host.
 
 ```bash
-python ./.pi/skills/fetch-mutations/main.py get_mutation_by_sample --q "host=United%20States" 
+python ./.pi/skills/fetch-mutations/main.py get_mutation_by_sample -q "host=United%20States" 
 ```
 When you want to write the filter query for q, always look up the schema of SampleInfo to decide which column to use.
 Common filters: country (country_name), time (collection_start_date/collection_end_date), state (admin1_name), host (cattle, chicken, etc)

@@ -43,3 +43,8 @@ Example questions:
 2. Give me the mutation profile of lineage BA.1 (sc2) or D1,1 (flu).
 3. Fetch annotation papers for the effect 'Enhanced replication in ferrets' by month.
 4. fetch me the most selective amino acid mutation i.e the aa mutation with the highest binding score using metric sa26_usage_increase_new, in Jan of 2022
+5. Fetch all annotation effects   
+6. Get mutations from cattle host 
+7. What is the mutation lag for lineage B3.13?
+8. Get annotations by amino acid position for Increased virus binding to α2-6
+9. Get lineage counts grouped by collection date for usda_genoflu
