@@ -41,3 +41,5 @@ python ./.pi/skills/fetch-mutations/main.py get_mutation_by_sample -q "host=Unit
 ```
 When you want to write the filter query for q, always look up the schema of SampleInfo to decide which column to use.
 Common filters: country (country_name), time (collection_start_date/collection_end_date), state (admin1_name), host (cattle, chicken, etc)
+
+When building the query, combine multiple filters using `^` (AND operator). Common SampleInfo columns: country_name, admin1_name, host, collection_start_date, collection_end_date.
