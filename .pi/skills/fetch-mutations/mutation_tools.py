@@ -13,15 +13,20 @@ from config import OUTBREAK_API_BASE, API_REQUEST_TIMEOUT
 def get_mutation_frequency_score(
         region: str,
         metric: str,
+        q: str | None = None,
+        include_refs: bool = False,
         visualize: bool = False,
         output_path: str | None = "mutation_frequency_score.png",
         export_csv: bool = False,
         csv_output_path: str = "mutation_data.csv"
 ) -> dict:
     url = f"{OUTBREAK_API_BASE}/mutations/frequency/score" #https://h5n1.outbreak.info/api/mutations/frequency/score?region=XAJ25415.1&metric=sa26_usage_increase_new
+    params = {"region": region, "metric": metric, "include_refs": include_refs}
+    if q is not None:
+        params["q"] = q
     response = requests.get(
         url = url,
-        params={"region": region, "metric": metric},
+        params=params,
         timeout=API_REQUEST_TIMEOUT
     )
     response.raise_for_status()

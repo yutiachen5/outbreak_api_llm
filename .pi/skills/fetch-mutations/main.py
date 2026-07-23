@@ -12,6 +12,8 @@ def main():
     p_mut_freq_score = subparsers.add_parser("get_mutation_frequency_score", help="Get mutation frequency score")
     p_mut_freq_score.add_argument("--region", required=True, help="Region of interest (e.g. XAJ25415.1)")
     p_mut_freq_score.add_argument("--metric", required=True, help="Metric of interest (e.g. sa26_usage_increase_new)")
+    p_mut_freq_score.add_argument("--q", default=None, type=str, help="Query string for sample filtering (custom syntax, e.g. dates/country/host)")
+    p_mut_freq_score.add_argument("--include_refs", action="store_true", default=False, help="Include reference (unchanged) mutations")
     p_mut_freq_score.add_argument("--visualize", action="store_true", default=False)
     p_mut_freq_score.add_argument("--output_path", default="mutation_frequency_score.png")
     p_mut_freq_score.add_argument("--export_csv", action="store_true", default=False)
@@ -30,6 +32,8 @@ def main():
         result = get_mutation_frequency_score(
             region=args.region,
             metric=args.metric,
+            q=args.q,
+            include_refs=args.include_refs,
             visualize=args.visualize,
             export_csv=args.export_csv,
             csv_output_path=args.csv_output_path,
