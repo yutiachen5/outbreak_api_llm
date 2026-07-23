@@ -3,6 +3,10 @@ name: fetch-variants
 description: Retrieves variant data from the outbreak API.
 ---
 
+## Host-level Data
+
+This skill retrieves host-level variant data. Use this when the user asks for host-level variants, intra-host variants, or data from specific hosts (as opposed to population-level mutations).
+
 ## Fetch Variant Frequency Scores by Region and Metric
 
 Retrieve variant frequency scores by region and metric.

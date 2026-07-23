@@ -2,6 +2,9 @@
 name: fetch-mutations
 description: Retrieves mutation data from the outbreak API.
 ---
+## Population-level Data
+
+This skill retrieves population-level mutation data. Use this when the user asks for mutations, phenotype metrics, or population-level data (as opposed to host-level variants).
 
 ## Fetch Mutation Frequency Scores by Region and Metric
 
